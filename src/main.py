@@ -20,7 +20,6 @@ from data_cleaning import (
     standardize_columns,
 )
 from eda import build_eda_tables, save_eda_tables
-from threshold_estimator import estimate_cutoffs
 from utils import prepare_output_directories, save_dataframe, setup_logging
 from visualization import create_visualizations
 
@@ -113,22 +112,6 @@ def main() -> None:
 
     create_visualizations(cleaned_df, score_columns, paths["figures"])
     logger.info("Đã sinh toàn bộ biểu đồ.")
-
-    threshold_rules_path = project_root / "data" / "raw" / "ueh_threshold_rules.json"
-    historical_cutoff_path = project_root / "data" / "raw" / "ueh_cutoffs_history.csv"
-    cutoff_estimates = estimate_cutoffs(
-        cleaned_df,
-        rules_path=threshold_rules_path,
-        historical_path=historical_cutoff_path,
-        output_dir=paths["tables"],
-    )
-    if not cutoff_estimates.empty:
-        logger.info(
-            "Đã sinh bảng ước lượng ngưỡng cạnh tranh: %s",
-            paths["tables"] / "cutoff_estimates.csv",
-        )
-    else:
-        logger.info("Chưa có file UEH threshold rules, bỏ qua bước ước lượng ngưỡng.")
 
     report_text = generate_report(
         raw_rows=raw_rows,
