@@ -8,8 +8,10 @@ import pandas as pd
 
 from analysis import (
     analyze_scores,
+    generate_html_report,
     generate_report,
     save_analysis_tables,
+    save_html_report,
     save_report,
 )
 from data_cleaning import (
@@ -124,11 +126,24 @@ def main() -> None:
     save_report(report_text, report_path)
     logger.info("Đã sinh báo cáo cuối cùng: %s", report_path)
 
+    html_report = generate_html_report(
+        raw_rows=raw_rows,
+        cleaned_rows=cleaned_rows,
+        cleaning_steps=cleaning_steps,
+        analysis_tables=analysis_tables,
+        score_columns=score_columns,
+        figures_dir=paths["figures"],
+    )
+    html_report_path = paths["reports"] / "report.html"
+    save_html_report(html_report, html_report_path)
+    logger.info("Đã sinh báo cáo HTML: %s", html_report_path)
+
     print("\nHoàn tất pipeline.\n")
     print(f"Dữ liệu sạch: {cleaned_output_path}")
     print(f"Biểu đồ: {paths['figures']}")
     print(f"Bảng: {paths['tables']}")
     print(f"Báo cáo: {report_path}")
+    print(f"HTML: {html_report_path}")
 
 
 if __name__ == "__main__":

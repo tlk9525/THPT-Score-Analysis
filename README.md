@@ -85,6 +85,11 @@ Chương trình sẽ tự động:
 - `output/tables/*.csv`
 - `output/figures/*.png`
 - `output/reports/report.txt`
+- `output/reports/report.html`
+
+## Xem báo cáo HTML
+
+Sau khi chạy xong, mở file `output/reports/report.html` bằng trình duyệt để xem báo cáo dạng web.
 
 ## Hình minh họa
 
