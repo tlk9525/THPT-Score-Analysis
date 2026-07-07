@@ -1,0 +1,28 @@
+{
+  "rules": [
+    {
+      "university": "UEH",
+      "major": "Kinh te",
+      "subject_columns": ["toan", "van", "ngoai_ngu"],
+      "weights": [1, 1, 1],
+      "quota": 800,
+      "application_rate": 10.0,
+      "bonus_points": 0.0,
+      "priority_points": 0.0,
+      "minimum_total_score": 15.0,
+      "note": "Vi du uoc luong nguong canh tranh cho A01/D01"
+    },
+    {
+      "university": "UEH",
+      "major": "Marketing",
+      "subject_columns": ["toan", "van", "ngoai_ngu"],
+      "weights": [1, 1, 1],
+      "quota": 150,
+      "application_rate": 12.0,
+      "bonus_points": 0.0,
+      "priority_points": 0.0,
+      "minimum_total_score": 15.0,
+      "note": "Vi du cho nganh hot"
+    }
+  ]
+}

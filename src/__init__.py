@@ -1,0 +1,2 @@
+"""THPT Score Analysis package."""
+
