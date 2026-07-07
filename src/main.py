@@ -28,19 +28,28 @@ from visualization import create_visualizations
 def _resolve_raw_data_path(project_root: Path) -> Path:
     """Find the raw CSV file in the project or nearby fallback locations."""
 
-    candidates = [
+    raw_dir = project_root / "data" / "raw"
+    preferred_files = sorted(raw_dir.glob("scores*.csv"))
+    if preferred_files:
+        return preferred_files[0]
+
+    fallback_candidates = [
         project_root.parent / "scores_2026_full.csv",
         project_root / "scores_2026_full.csv",
-        project_root / "data" / "raw" / "scores.csv",
-        project_root / "data" / "raw" / "scores_2026_full.csv",
     ]
-    for candidate in candidates:
+    for candidate in fallback_candidates:
         if candidate.exists():
             return candidate
-    raw_dir = project_root / "data" / "raw"
+
     csv_files = sorted(raw_dir.glob("*.csv"))
-    if csv_files:
+    if len(csv_files) == 1:
         return csv_files[0]
+    if len(csv_files) > 1:
+        available = ", ".join(path.name for path in csv_files)
+        raise FileNotFoundError(
+            "Có nhiều file CSV trong data/raw nhưng không có file nào bắt đầu bằng 'scores'. "
+            f"Hãy giữ đúng 1 file đầu vào hoặc đổi tên file dữ liệu. Hiện có: {available}"
+        )
     raise FileNotFoundError(
         "Không tìm thấy file CSV đầu vào. Hãy đặt dữ liệu vào data/raw/ trước khi chạy."
     )

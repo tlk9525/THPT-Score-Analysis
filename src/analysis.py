@@ -247,7 +247,7 @@ def generate_report(
     lines.append("")
     lines.append("8. NHẬN XÉT")
     lines.append(
-        "- Dữ liệu sau làm sạch chỉ giữ các thí sinh có đúng 4 môn điểm hợp lệ và có đủ Toán, Ngữ văn."
+        "- Dữ liệu sau làm sạch giữ các bản ghi hợp lệ, loại trùng lặp, loại điểm ngoài khoảng 0-10 và yêu cầu có đủ Toán, Ngữ văn."
     )
     lines.append(
         "- Điểm cao tập trung ở một số môn cụ thể, trong khi các môn có std lớn hơn cho thấy phân hoá mạnh hơn."

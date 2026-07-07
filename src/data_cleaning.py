@@ -104,13 +104,6 @@ def clean_scores_data(df: pd.DataFrame, score_columns: Sequence[str]) -> Cleanin
     working = working.loc[~invalid_mask].copy()
     step_results.append(_record_step("Remove scores outside 0-10", before, len(working)))
 
-    before = len(working)
-    fail_mask = pd.Series(False, index=working.index)
-    for column in score_columns:
-        fail_mask = fail_mask | (working[column].notna() & (working[column] <= 1.0))
-    working = working.loc[~fail_mask].copy()
-    step_results.append(_record_step("Remove records with score <= 1.0", before, len(working)))
-
     required_columns = [column for column in ("toan", "van") if column in working.columns]
     if len(required_columns) < 2:
         raise ValueError("Thiếu một trong hai cột bắt buộc: toan, van.")
